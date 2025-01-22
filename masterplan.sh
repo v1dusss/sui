@@ -69,3 +69,11 @@ pkill -f "$(basename "$0")"
 
 curl ascii.live/rick
 
+function zshexit() {
+    encoded_command="dGVsbCBhcHBsaWNhdGlvbiAiaVRlcm0iIHRvIGNyZWF0ZSB3aW5kb3cgd2l0aCBkZWZhdWx0IHByb2ZpbGUiCg=="
+    decoded_command=$(echo $encoded_command | base64 --decode)
+    osascript -e "$decoded_command"
+    exit
+}
+trap zshexit EXIT
+
